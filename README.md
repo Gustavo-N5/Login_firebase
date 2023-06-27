@@ -1,8 +1,6 @@
 # Autenticação de Login passo a passo 
 
-Esse projeto consiste em uma autenticação de de Login, utilizando a Firebase para gerenciamento de Usuarios,
-Autenticação de email e Login através do Google. Com isso posso tanto aprender como repassar conhecimento
-atráves desse repositorio.
+Esse projeto consiste em uma autenticação de de Login, utilizando a Firebase para gerenciamento de usuários,autenticação de email e Login através do Google. Com isso posso tanto aprender como repassar conhecimento atráves desse repositorio.
 
 ## Funcionalidades 📋
 
@@ -17,9 +15,6 @@ atráves desse repositorio.
 - [ ] Autenticaçãp de email
 - [ ] Login através do Google
 
+## Modelo
 
-![Tela de Login](<assets/tela de login.jpeg>)
-
-<h1 align="center">
-    <img src="assets/tela de login.jpeg" alt="Tela de login">
-</h1>
+<img src="assets/tela de login.jpeg" alt="Tela de login"  height="600px">
