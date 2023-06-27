@@ -16,5 +16,6 @@ Esse projeto consiste em uma autenticação de de Login, utilizando a Firebase p
 - [ ] Login através do Google
 
 ## Modelo
-
-<img src="assets/tela de login.jpeg" alt="Tela de login"  height="600px">
+<h1 align="center">
+    <img src="assets/tela de login.jpeg" alt="Tela de login"  height="600px">
+</h1>
