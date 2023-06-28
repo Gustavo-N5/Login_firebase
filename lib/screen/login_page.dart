@@ -1,17 +1,83 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teste_firebase/components/my_button.dart';
 import 'package:teste_firebase/components/my_login_button.dart';
 import 'package:teste_firebase/components/my_text_field.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   //Controllers
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   //metodo de login
-  void siginUserIn() {}
+  void siginUserIn() async {
+    // Tela de carregamento
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(
+            color: Colors.black,
+          ),
+        );
+      },
+    );
+
+    // metodo de login
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+
+      // Notificar email errado
+      if (e.code == "user-not-found") {
+        // erro email
+        wrongEmailMessage();
+      }
+      // Notificar que a senha esta errada
+      else if (e.code == "wrong-password") {
+        // Erro senmha
+        wrongPasswordMessage();
+      }
+    }
+  }
+
+  // Exibindo menssagem de erro  para o email incorreto
+  void wrongEmailMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text("Email incorreto"),
+        );
+      },
+    );
+  }
+
+  // Exibindo mensagem derro para a senha incorreta
+  void wrongPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text("Senha incorreto"),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +108,7 @@ class LoginPage extends StatelessWidget {
             ),
             //user naem TextField
             MyTextField(
-              controller: usernameController,
+              controller: emailController,
               hintText: "Email",
               obscureText: false,
             ),
@@ -80,7 +146,13 @@ class LoginPage extends StatelessWidget {
               height: 50,
             ),
             // botao de login
-            MyButton(onTap: siginUserIn),
+
+            MyButton(
+              onTap: () {
+                siginUserIn();
+              },
+            ),
+
             const SizedBox(
               height: 50,
             ),

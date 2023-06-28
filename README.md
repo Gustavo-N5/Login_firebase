@@ -5,17 +5,19 @@ Esse projeto consiste em uma autenticação de de Login, utilizando a Firebase p
 ## Funcionalidades 📋
 
 - Autenticação de usuários;
+- Criar usuário
 - Autenticação de email;
 - Login através do Google.
 
 ## Etapas 📈
 
 - [x] Montagem da tela de login
-- [ ] Adicionar Autenticação de usuário através da Firebase
-- [ ] Autenticaçãp de email
+- [x] Adicionar Autenticação de usuário através da Firebase
+- [ ] Criar usário
 - [ ] Login através do Google
 
 ## Modelo
+
 <h1 align="center">
     <img src="assets/tela de login.jpeg" alt="Tela de login"  height="600px">
 </h1>
