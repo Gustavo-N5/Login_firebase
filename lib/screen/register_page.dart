@@ -1,26 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:teste_firebase/components/my_button.dart';
-import 'package:teste_firebase/components/my_login_button.dart';
-import 'package:teste_firebase/components/my_text_field.dart';
 
-class LoginPage extends StatefulWidget {
+import '../components/my_button.dart';
+import '../components/my_login_button.dart';
+import '../components/my_text_field.dart';
+
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
 
-  const LoginPage({
+  const RegisterPage({
     super.key,
     required this.onTap,
   });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   //Controllers
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
+
+  final TextEditingController passwordConfirmController =
+      TextEditingController();
 
   //metodo de login
   void siginUserIn() async {
@@ -38,10 +42,16 @@ class _LoginPageState extends State<LoginPage> {
 
     // metodo de login
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
+      //  Verificando se o password sao iguais
+      if (passwordController.text == passwordConfirmController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+      } else {
+        wrongMessageError("Verifique se as senhas estão iaguais");
+      }
+
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
@@ -72,6 +82,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // variavel de login
+  bool showloginPage = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,12 +94,12 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 80,
+              height: 70,
             ),
             // Logo
             const Icon(
               Icons.account_circle_sharp,
-              size: 100,
+              size: 60,
             ),
             // Bem vindo
             Text(
@@ -99,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 25,
             ),
-            //user naem TextField
+            //Email
             MyTextField(
               controller: emailController,
               hintText: "Email",
@@ -109,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 10,
             ),
-            // Passord TextField
+            // senha
             MyTextField(
               controller: passwordController,
               hintText: "Senha",
@@ -119,21 +132,11 @@ class _LoginPageState extends State<LoginPage> {
               height: 10,
             ),
 
-            // Esqueceu a senha
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Esqueceu a senha?",
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ],
-              ),
+            // confirma senha
+            MyTextField(
+              controller: passwordConfirmController,
+              hintText: "Confirmar senha",
+              obscureText: true,
             ),
 
             const SizedBox(
@@ -142,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
             // botao de login
 
             MyButton(
-              text: "Entrar",
+              text: "Cadastrar",
               onTap: () {
                 siginUserIn();
               },
@@ -202,13 +205,13 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Ainda não tem registro?",
+                  "Possui Login?",
                   style: TextStyle(color: Colors.grey[700]),
                 ),
                 GestureDetector(
                   onTap: widget.onTap,
                   child: Text(
-                    "Registri-se",
+                    "Login",
                     style: TextStyle(
                       color: Colors.grey[800],
                       fontWeight: FontWeight.bold,
