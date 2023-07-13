@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:teste_firebase/components/my_button.dart';
 import 'package:teste_firebase/components/my_login_button.dart';
 import 'package:teste_firebase/components/my_text_field.dart';
+import 'package:teste_firebase/services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -185,10 +186,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             // google sigin
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyLoginButton(
+                  onTap: () => AuthService().lgoinGoogle(context),
                   image: "assets/images/google.png",
                 )
               ],

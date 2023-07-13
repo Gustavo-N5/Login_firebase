@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:teste_firebase/services/auth_service.dart';
 
 import '../components/my_button.dart';
 import '../components/my_login_button.dart';
@@ -188,10 +189,11 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
 
             // google sigin
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyLoginButton(
+                  onTap: () => AuthService().lgoinGoogle(context),
                   image: "assets/images/google.png",
                 )
               ],

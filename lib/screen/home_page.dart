@@ -15,21 +15,39 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         actions: [
           IconButton(
             onPressed: () {
               siginUserOut();
             },
-            icon: const Icon(Icons.logout),
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          "Seja bem vindo ${user.email!}",
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Center(
+          child: Column(
+            children: [
+              const Text(
+                "Seja bem vindo:",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              Text(
+                user.email!,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            ],
           ),
         ),
       ),

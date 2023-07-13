@@ -13,8 +13,8 @@ Esse projeto consiste em uma autenticação de de Login, utilizando a Firebase p
 
 - [x] Montagem da tela de login
 - [x] Adicionar Autenticação de usuário através da Firebase
-- [ ] Criar usário
-- [ ] Login através do Google
+- [x] Criar usário
+- [x] Login através do Google
 
 ## Modelo
 
